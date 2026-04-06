@@ -1,0 +1,119 @@
+Modules imported.
+Building model and data...
+Precomputing 3D positions...
+Augmentation stats: 5445 sequences, avg augments=74.2, min=1, max=80
+Compiling model...
+Warming up (5 steps)...
+W0406 03:52:40.461000 18022 torch/_dynamo/variables/tensor.py:1379] [0/0] Graph break from `Tensor.item()`, consider setting:
+W0406 03:52:40.461000 18022 torch/_dynamo/variables/tensor.py:1379] [0/0]     torch._dynamo.config.capture_scalar_outputs = True
+W0406 03:52:40.461000 18022 torch/_dynamo/variables/tensor.py:1379] [0/0] or:
+W0406 03:52:40.461000 18022 torch/_dynamo/variables/tensor.py:1379] [0/0]     env TORCHDYNAMO_CAPTURE_SCALAR_OUTPUTS=1
+W0406 03:52:40.461000 18022 torch/_dynamo/variables/tensor.py:1379] [0/0] to include these operations in the captured graph.
+W0406 03:52:40.461000 18022 torch/_dynamo/variables/tensor.py:1379] [0/0] 
+W0406 03:52:40.461000 18022 torch/_dynamo/variables/tensor.py:1379] [0/0] Graph break: from user code at:
+W0406 03:52:40.461000 18022 torch/_dynamo/variables/tensor.py:1379] [0/0]   File "/root/jippityTwo/mdlARC/src/tinytransformer.py", line 695, in forward
+W0406 03:52:40.461000 18022 torch/_dynamo/variables/tensor.py:1379] [0/0]     return self._forward_varlen(
+W0406 03:52:40.461000 18022 torch/_dynamo/variables/tensor.py:1379] [0/0]   File "/root/jippityTwo/mdlARC/src/tinytransformer.py", line 888, in _forward_varlen
+W0406 03:52:40.461000 18022 torch/_dynamo/variables/tensor.py:1379] [0/0]     if int(cu_seqlens[0].item()) != 0:
+W0406 03:52:40.461000 18022 torch/_dynamo/variables/tensor.py:1379] [0/0] 
+W0406 03:52:40.461000 18022 torch/_dynamo/variables/tensor.py:1379] [0/0] 
+  warmup step 1/5 done, loss=2.9782
+  warmup step 2/5 done, loss=6.3918
+  warmup step 3/5 done, loss=7.6770
+  warmup step 4/5 done, loss=4.4169
+  warmup step 5/5 done, loss=5.0179
+
+Profiling (wait=1, warmup=2, active=5 steps)...
+/root/jippityTwo/.venv/lib/python3.12/site-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+  profile step 1/8 done
+  profile step 2/8 done
+  profile step 3/8 done
+[W406 03:52:51.326958719 CPUAllocator.cpp:245] Memory block of unknown size was allocated before the profiling started, profiler results will not include the deallocation event
+  profile step 4/8 done
+  profile step 5/8 done
+  profile step 6/8 done
+  profile step 7/8 done
+  profile step 8/8 done
+
+================================================================================
+TOP 30 CUDA KERNELS BY TOTAL CUDA TIME
+================================================================================
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg       CPU Mem  Self CPU Mem      CUDA Mem  Self CUDA Mem    # of Calls   Total FLOPs  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                          ProfilerStep*         0.00%       0.000us         0.00%       0.000us       0.000us     197.439ms        90.07%     197.439ms      39.488ms           0 B           0 B           0 B           0 B             5            --  
+## Call CompiledFxGraph f55dafxdwndgze3qixiswyqirsxa...         0.00%       0.000us         0.00%       0.000us       0.000us     118.879ms        54.23%     118.879ms      23.776ms           0 B           0 B           0 B           0 B             5            --  
+autograd::engine::evaluate_function: CompiledFunctio...         0.06%     185.348us        18.42%      54.304ms       3.620ms       0.000us         0.00%     116.194ms       7.746ms           0 B           0 B     -15.73 GB    -167.63 MB            15            --  
+                               CompiledFunctionBackward         0.58%       1.709ms        18.36%      54.118ms       3.608ms       0.000us         0.00%     116.194ms       7.746ms           0 B           0 B     -15.57 GB      -1.52 MB            15            --  
+## Call CompiledFxGraph f55dafxdwndgze3qixiswyqirsxa...        12.40%      36.572ms        17.29%      50.962ms      10.192ms       0.000us         0.00%     115.869ms      23.174ms           0 B           0 B     -15.59 GB     -15.62 GB             5            --  
+                                               aten::mm         1.61%       4.736ms         2.07%       6.104ms      14.708us      92.182ms        42.05%      92.182ms     222.126us           0 B           0 B           0 B           0 B           415  19258682535936.000  
+                                          ProfilerStep*        20.95%      61.775ms        77.52%     228.546ms      45.709ms       0.000us         0.00%      82.010ms      16.402ms     281.38 KB      -1.46 MB    -596.50 KB     -15.74 GB             5            --  
+## Call CompiledFxGraph f7atvnnjheftr7b6feu4if6ijjh6...         0.00%       0.000us         0.00%       0.000us       0.000us      59.872ms        27.31%      59.872ms      11.974ms           0 B           0 B           0 B           0 B             5            --  
+                             Torch-Compiled Region: 0/1         0.01%      23.955us        23.10%      68.110ms      13.622ms       0.000us         0.00%      58.801ms      11.760ms           0 B           0 B      17.19 GB           0 B             5            --  
+                             Torch-Compiled Region: 1/1         0.11%     324.285us        23.08%      68.048ms      13.610ms       0.000us         0.00%      58.801ms      11.760ms           0 B           0 B      17.19 GB           0 B             5            --  
+                             Torch-Compiled Region: 2/0         0.08%     236.982us        22.88%      67.450ms      13.490ms       0.000us         0.00%      58.798ms      11.760ms           0 B           0 B      17.19 GB           0 B             5            --  
+                             Torch-Compiled Region: 3/1         0.06%     189.151us        22.74%      67.040ms      13.408ms       0.000us         0.00%      58.796ms      11.759ms           0 B           0 B      17.19 GB      -5.00 KB             5            --  
+                             Torch-Compiled Region: 4/1         0.10%     305.926us        22.52%      66.406ms      13.281ms       0.000us         0.00%      58.790ms      11.758ms           0 B           0 B      17.19 GB    -334.35 MB             5            --  
+                             Torch-Compiled Region: 5/1         0.23%     668.722us        21.88%      64.500ms      12.900ms       0.000us         0.00%      58.591ms      11.718ms           0 B           0 B      17.19 GB    -726.00 KB             5            --  
+                                       CompiledFunction         0.88%       2.584ms        13.57%      40.010ms       2.667ms       0.000us         0.00%      58.563ms       3.904ms           0 B           0 B      17.36 GB           0 B            15            --  
+## Call CompiledFxGraph f7atvnnjheftr7b6feu4if6ijjh6...         8.90%      26.237ms        12.31%      36.288ms       7.258ms       0.000us         0.00%      58.457ms      11.691ms           0 B           0 B      17.19 GB      16.52 GB             5            --  
+                                            aten::addmm         0.34%       1.005ms         0.42%       1.226ms      15.331us      29.551ms        13.48%      29.551ms     369.382us           0 B           0 B           0 B           0 B            80  6418342084608.000  
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s1681...         0.00%       0.000us         0.00%       0.000us       0.000us      23.329ms        10.64%      23.329ms     507.146us           0 B           0 B           0 B           0 B            46            --  
+                              Optimizer.step#AdamW.step         0.00%       0.000us         0.00%       0.000us       0.000us      20.461ms         9.33%      20.461ms       4.092ms           0 B           0 B           0 B           0 B             5            --  
+                              Optimizer.step#AdamW.step         1.60%       4.712ms         2.46%       7.263ms       1.453ms       0.000us         0.00%      20.219ms       4.044ms           0 B         -20 B           0 B      -1.44 GB             5            --  
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s1681...         0.00%       0.000us         0.00%       0.000us       0.000us      15.820ms         7.22%      15.820ms     494.380us           0 B           0 B           0 B           0 B            32            --  
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s1681...         0.00%       0.000us         0.00%       0.000us       0.000us      15.014ms         6.85%      15.014ms     469.180us           0 B           0 B           0 B           0 B            32            --  
+void flash::flash_bwd_dq_dk_dv_loop_seqk_parallel_ke...         0.00%       0.000us         0.00%       0.000us       0.000us      14.085ms         6.43%      14.085ms     299.686us           0 B           0 B           0 B           0 B            47            --  
+                flash_attn::_flash_attn_varlen_backward         0.71%       2.090ms         0.95%       2.804ms      70.093us      13.966ms         6.37%      13.966ms     349.148us           0 B           0 B      28.27 MB      -1.77 GB            40            --  
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s1681...         0.00%       0.000us         0.00%       0.000us       0.000us      13.484ms         6.15%      13.484ms     195.420us           0 B           0 B           0 B           0 B            69            --  
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s1681...         0.00%       0.000us         0.00%       0.000us       0.000us      12.777ms         5.83%      12.777ms     266.193us           0 B           0 B           0 B           0 B            48            --  
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s1681...         0.00%       0.000us         0.00%       0.000us       0.000us      11.504ms         5.25%      11.504ms     250.097us           0 B           0 B           0 B           0 B            46            --  
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s1681...         0.00%       0.000us         0.00%       0.000us       0.000us      11.055ms         5.04%      11.055ms     240.320us           0 B           0 B           0 B           0 B            46            --  
+triton_poi_fused_cat_mul_native_dropout_backward_sil...         0.00%       0.000us         0.00%       0.000us       0.000us       9.743ms         4.44%       9.743ms     211.795us           0 B           0 B           0 B           0 B            46            --  
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s1681...         0.00%       0.000us         0.00%       0.000us       0.000us       9.607ms         4.38%       9.607ms     240.174us           0 B           0 B           0 B           0 B            40            --  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 294.833ms
+Self CUDA time total: 219.199ms
+
+
+================================================================================
+TOP 20 BY CUDA MEMORY USAGE
+================================================================================
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg       CPU Mem  Self CPU Mem      CUDA Mem  Self CUDA Mem    # of Calls   Total FLOPs  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                       CompiledFunction         0.88%       2.584ms        13.57%      40.010ms       2.667ms       0.000us         0.00%      58.563ms       3.904ms           0 B           0 B      17.36 GB           0 B            15            --  
+                             Torch-Compiled Region: 0/1         0.01%      23.955us        23.10%      68.110ms      13.622ms       0.000us         0.00%      58.801ms      11.760ms           0 B           0 B      17.19 GB           0 B             5            --  
+                             Torch-Compiled Region: 1/1         0.11%     324.285us        23.08%      68.048ms      13.610ms       0.000us         0.00%      58.801ms      11.760ms           0 B           0 B      17.19 GB           0 B             5            --  
+                             Torch-Compiled Region: 2/0         0.08%     236.982us        22.88%      67.450ms      13.490ms       0.000us         0.00%      58.798ms      11.760ms           0 B           0 B      17.19 GB           0 B             5            --  
+                             Torch-Compiled Region: 3/1         0.06%     189.151us        22.74%      67.040ms      13.408ms       0.000us         0.00%      58.796ms      11.759ms           0 B           0 B      17.19 GB      -5.00 KB             5            --  
+                             Torch-Compiled Region: 4/1         0.10%     305.926us        22.52%      66.406ms      13.281ms       0.000us         0.00%      58.790ms      11.758ms           0 B           0 B      17.19 GB    -334.35 MB             5            --  
+## Call CompiledFxGraph f7atvnnjheftr7b6feu4if6ijjh6...         8.90%      26.237ms        12.31%      36.288ms       7.258ms       0.000us         0.00%      58.457ms      11.691ms           0 B           0 B      17.19 GB      16.52 GB             5            --  
+                             Torch-Compiled Region: 5/1         0.23%     668.722us        21.88%      64.500ms      12.900ms       0.000us         0.00%      58.591ms      11.718ms           0 B           0 B      17.19 GB    -726.00 KB             5            --  
+                                    aten::empty_strided         0.28%     829.904us         0.28%     829.904us       1.930us       0.000us         0.00%       0.000us       0.000us       2.50 KB       2.50 KB       2.09 GB       2.09 GB           430            --  
+                                            aten::empty         0.23%     682.686us         0.23%     682.686us       2.314us       0.000us         0.00%       0.000us       0.000us       1.73 MB       1.73 MB       1.82 GB       1.82 GB           295            --  
+                                    aten::_foreach_sqrt         0.14%     410.647us         0.35%       1.047ms     209.324us       2.052ms         0.94%       2.052ms     410.386us           0 B           0 B       1.44 GB           0 B             5            --  
+                 flash_attn::_flash_attn_varlen_forward         0.74%       2.191ms         0.98%       2.882ms      72.056us       5.271ms         2.40%       5.271ms     131.781us           0 B           0 B     685.85 MB           0 B            40            --  
+                                       aten::empty_ like         0.03%      96.144us         0.09%     269.113us       5.980us       0.000us         0.00%       0.000us       0.000us           0 B           0 B     665.07 MB           0 B            45            --  
+                                aten::repeat_interleave         0.06%     187.780us        16.08%      47.397ms       1.580ms      30.560us         0.01%     327.349us      10.912us           0 B           0 B     169.54 MB    -910.50 KB            30            --  
+## Call CompiledFxGraph fxcqmfuhkdo2okuq2qhg7plpkqdp...         0.12%     363.329us         0.20%     581.168us     116.234us       0.000us         0.00%      83.905us      16.781us           0 B           0 B     167.84 MB     167.84 MB             5            --  
+                                     aten::index_select         0.04%     107.414us         0.11%     312.289us      20.819us       0.000us         0.00%     108.351us       7.223us           0 B           0 B     167.81 MB           0 B            15            --  
+                                          aten::resize_         0.01%      24.016us         0.01%      24.016us       1.201us       0.000us         0.00%       0.000us       0.000us           0 B           0 B     167.81 MB     167.81 MB            20            --  
+                flash_attn::_flash_attn_varlen_backward         0.71%       2.090ms         0.95%       2.804ms      70.093us      13.966ms         6.37%      13.966ms     349.148us           0 B           0 B      28.27 MB      -1.77 GB            40            --  
+## Call CompiledFxGraph fcq4yeejiudpsfqchh53fpqjyve5...         0.16%     477.343us         0.25%     733.544us     146.709us       0.000us         0.00%     312.636us      62.527us           0 B           0 B      19.47 MB      19.47 MB             5            --  
+                                               aten::to         0.03%      98.627us        25.20%      74.295ms     176.892us       0.000us         0.00%      61.282us       0.146us       2.50 KB           0 B       1.74 MB           0 B           420            --  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 294.833ms
+Self CUDA time total: 219.199ms
+
+Traceback (most recent call last):
+  File "/root/jippityTwo/mdlARC/profile_training.py", line 215, in <module>
+    prof.export_chrome_trace(trace_path)
+  File "/root/jippityTwo/.venv/lib/python3.12/site-packages/torch/profiler/profiler.py", line 301, in export_chrome_trace
+    return self.profiler.export_chrome_trace(path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/jippityTwo/.venv/lib/python3.12/site-packages/torch/autograd/profiler.py", line 521, in export_chrome_trace
+    self.kineto_results.save(path)  # type: ignore[union-attr]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Trace is already saved.
