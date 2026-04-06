@@ -2,6 +2,7 @@
 python3 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip setuptools wheel
+pip install ninja
 pip install nvcc4jupyter numpy jupyter_client ipykernel ipywidgets
 pip install triton
 pip install torch
